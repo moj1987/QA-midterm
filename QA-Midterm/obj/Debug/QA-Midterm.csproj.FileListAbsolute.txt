@@ -1,0 +1,7 @@
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\bin\Debug\QA-Midterm.exe.config
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\bin\Debug\QA-Midterm.exe
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\bin\Debug\QA-Midterm.pdb
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\obj\Debug\QA-Midterm.csprojAssemblyReference.cache
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\obj\Debug\QA-Midterm.csproj.CoreCompileInputs.cache
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\obj\Debug\QA-Midterm.exe
+C:\Users\M\source\repos\8170 QA\QA-Midterm\QA-Midterm\obj\Debug\QA-Midterm.pdb
