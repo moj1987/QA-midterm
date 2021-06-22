@@ -1,37 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QA_Midterm
 {
     internal class Program
     {
-        public static string Input;
-        public static string output;
         private static int integerCommand;
         private static int integerDimension;
-        private static int dimensionA;
-        private static int dimensionB;
-        private static int dimensionC;
-        private static int inputDimesions = 0;
+
+        private const int MIN_MENU_ITEMS = 1;
+        private const int MAX_MENU_ITEMS = 2;
 
         private static void Main(string[] args)
         {
             while (true)
             {
-                InitiateMenuSelection();
+                GetCommand();
                 ExecuteMenuCommand();
-                ResetAllNumbers();
             }
         }
 
-        private static void InitiateMenuSelection()
+        private static void GetCommand()
         {
-            ShowMenu();
-            ReadUserInput();
-            ValidateMenuSelection();
+            bool IsCommandInteger = false;
+            while (!IsCommandInteger)
+            {
+                ShowMenu();
+                var inputString = ReadUserInput();
+                IsCommandInteger = int.TryParse(inputString, out integerCommand);
+            }
+
+            if (integerCommand > MAX_MENU_ITEMS || integerCommand < MIN_MENU_ITEMS)
+            {
+                GetCommand();
+            }
         }
 
         private static void ExecuteMenuCommand()
@@ -39,10 +40,14 @@ namespace QA_Midterm
             switch (integerCommand)
             {
                 case 1:
-                    GetDimensions();
-                    output = TriangleSolver.Analyze(dimensionA, dimensionB, dimensionC);
+                    var dimensionA = GetDimension();
+                    var dimensionB = GetDimension();
+                    var dimensionC = GetDimension();
+
+                    var output = TriangleSolver.Analyze(dimensionA, dimensionB, dimensionC);
                     Console.WriteLine(output);
-                    Console.WriteLine("*** *** ***");
+                    Console.WriteLine("********************");
+
                     break;
 
                 case 2:
@@ -51,84 +56,27 @@ namespace QA_Midterm
             }
         }
 
-        private static void ValidateMenuSelection()
+        private static int GetDimension()
         {
-            IsInputInteger();
-            CheckInputRage();
+            bool hasRecivedValidNumber = false;
+            while (!hasRecivedValidNumber)
+            {
+                Console.WriteLine("Enter a trianlge dimension");
+                var inputString = ReadUserInput();
+                hasRecivedValidNumber = int.TryParse(inputString, out integerDimension);
+            }
+            return integerDimension;
         }
 
-        private static void CheckInputRage()
+        private static string ReadUserInput()
         {
-            if (integerCommand > 2 || integerCommand < 1)
-            {
-                InitiateMenuSelection();
-            }
-        }
-
-        private static void IsInputInteger()
-        {
-            if (!int.TryParse(Input, out integerCommand))
-            {
-                InitiateMenuSelection();
-            }
-        }
-
-        private static void GetDimensions()
-        {
-            Console.WriteLine("Enter a trianlge dimension");
-            ReadUserInput();
-            IsDimensionInteger();
-            inputDimesions++;
-
-            switch (inputDimesions)
-            {
-                case 1:
-                    dimensionA = integerDimension;
-                    GetDimensions();
-                    break;
-
-                case 2:
-                    dimensionB = integerDimension;
-                    GetDimensions();
-                    break;
-
-                case 3:
-                    dimensionC = integerDimension;
-                    break;
-            }
-
-            while (inputDimesions < 3)
-            {
-                GetDimensions();
-            }
-        }
-
-        private static void IsDimensionInteger()
-        {
-            if (!int.TryParse(Input, out integerDimension))
-            {
-                Console.WriteLine("Integer mate!!!!");
-                GetDimensions();
-            }
-        }
-
-        private static void ReadUserInput()
-        {
-            Input = Console.ReadLine();
+            return Console.ReadLine();
         }
 
         private static void ShowMenu()
         {
             Console.WriteLine("1. Enter trianlge dimensions");
             Console.WriteLine("2. Exit");
-        }
-
-        private static void ResetAllNumbers()
-        {
-            inputDimesions = 0;
-            dimensionA = 0;
-            dimensionB = 0;
-            dimensionC = 0;
         }
     }
 }
